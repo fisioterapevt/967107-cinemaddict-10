@@ -1,7 +1,7 @@
 # Личный проект «Киноман» [![Build status][travis-image]][travis-url]
 
 * Студент: [Tikhon Izmailov](https://up.htmlacademy.ru/ecmascript/10/user/967107).
-* Наставник: `Неизвестно`.
+* Наставник: [Алексей Белявский] (https://htmlacademy.ru/profile/id666435).
 
 ---
 
