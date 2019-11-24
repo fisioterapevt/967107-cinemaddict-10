@@ -1,3 +1,5 @@
+'use strict';
+
 const FILM_COUNT = 5;
 const TOP_RATED_COUNT = 2;
 const MOST_COMMENTED_COUNT = 2;
