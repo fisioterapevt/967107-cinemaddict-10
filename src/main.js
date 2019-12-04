@@ -97,8 +97,8 @@ const onPopupOpenAndClose = () => { // открывает и закрывает 
   render(siteFooterElement, createMovieDetailesTemplate(moviePopup));// отрисовывает попап
   const buttonPopupClose = document.querySelector(`.film-details__close-btn`);
   buttonPopupClose.addEventListener(`click`, () => {
-    const Close = document.querySelector(`.film-details`);
-    Close.remove();
+    const closePopup = document.querySelector(`.film-details`);
+    closePopup.remove();
   });
 };
 
