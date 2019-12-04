@@ -1,4 +1,4 @@
-export const createFilmsMostCommentedTemplate = () => {
+export const createMoviesMostCommentedTemplate = () => {
   return (
     `<section class="films-list--extra">
         <h2 class="films-list__title">Most commented</h2>

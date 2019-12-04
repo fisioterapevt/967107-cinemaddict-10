@@ -10,7 +10,6 @@ module.exports = {
   devtool: `source-map`,
   devServer: {
     contentBase: path.join(__dirname, `public`), // где искать сборку
-    publicPath: `http://localhost:8080/`, // веб адрес сборки
     compress: true, // сжатие
     // автоматическая перезагрузка страницы
     // в случае отказа в работе по стандартному URL http://localhost:8080

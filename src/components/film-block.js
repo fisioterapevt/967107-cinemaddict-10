@@ -1,4 +1,4 @@
-export const createFilmsBlockTemplate = () => {
+export const createMoviesBlockTemplate = () => {
   return (
     `<section class="films">
         <section class="films-list">
