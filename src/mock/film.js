@@ -1,17 +1,15 @@
 import {
-  MovieNames,
-  MoviePosters,
-  MovieDiscription,
-  MovieGenres,
+  FilmNames,
+  FilmPosters,
+  FilmDiscription,
+  FilmGenres,
   Directors,
   Writers,
   Actors,
   Countries
 } from '../const/const';
 
-const MOVIES_COUNT = 15; // количество фильмов
-
-const arrDescription = MovieDiscription.split(`. `); // разбивает общее описание на массив предложений
+const arrDescription = FilmDiscription.split(`. `); // разбивает общее описание на массив предложений
 
 const getRandomArrayItem = (array) => { // возвращает рандомное количество элементов в array
   const randomIndex = getRandomNumber(0, array.length - 1);
@@ -25,11 +23,11 @@ const getRandomNumber = (min, max) => { // возвращает рандомно
 // возвращает рандомно из массива предложений arr элементы  в количестве count
 const getRandomArray = (arr, count) => arr.sort(() => Math.random() - 0.5).slice(0, count).join(` `);
 
-const generateMovie = () => {
+const generateFilm = () => {
 
   return {
-    nameMovie: getRandomArrayItem(MovieNames),
-    posterMovie: getRandomArrayItem(MoviePosters),
+    nameFilm: getRandomArrayItem(FilmNames),
+    posterFilm: getRandomArrayItem(FilmPosters),
     description: getRandomArray(arrDescription, getRandomNumber(1, 3)),
     rating: getRandomNumber(0, 10),
     year: getRandomNumber(1950, 2019),
@@ -37,7 +35,7 @@ const generateMovie = () => {
       hour: getRandomNumber(0, 1),
       min: getRandomNumber(0, 60)
     },
-    genre: getRandomArrayItem(MovieGenres),
+    genre: getRandomArrayItem(FilmGenres),
     countComments: getRandomNumber(0, 20),
     isFavorite: Math.random() > 0.8,
     isWatched: Math.random() > 0.3,
@@ -45,22 +43,18 @@ const generateMovie = () => {
   };
 };
 
-const generateMovies = (count, foo) => {
+const generateFilms = (count, foo) => {
   return new Array(count)
     .fill(``)
     .map(foo);
 };
 
-const moviesBlock = generateMovies(MOVIES_COUNT, generateMovie); // генерирует блок фильмов
-
-
-const generateMoviePopup = () => { // генерирует данные для Popup
-
+const generateFilmPopup = () => { // генерирует данные для Popup
   return {
-    nameMovie: getRandomArrayItem(MovieNames),
-    posterMovie: getRandomArrayItem(MoviePosters),
+    nameFilm: getRandomArrayItem(FilmNames),
+    posterFilm: getRandomArrayItem(FilmPosters),
     ageRestricted: Math.random() > 0.5 ? `18+` : ``,
-    original: getRandomArrayItem(MovieNames),
+    original: getRandomArrayItem(FilmNames),
     director: getRandomArrayItem(Directors),
     writer: getRandomArray(Writers, getRandomNumber(1, 3)),
     actor: getRandomArray(Actors, getRandomNumber(2, 4)),
@@ -70,19 +64,15 @@ const generateMoviePopup = () => { // генерирует данные для P
       min: getRandomNumber(0, 60)
     },
     country: getRandomArrayItem(Countries),
-    genre: getRandomArray(MovieGenres, getRandomNumber(1, 3)),
-    description: MovieDiscription,
+    genre: getRandomArray(FilmGenres, getRandomNumber(1, 3)),
+    description: FilmDiscription,
     rating: getRandomNumber(0, 10),
     countComments: getRandomNumber(0, 20)
   };
 };
 
-const moviePopup = generateMoviePopup();// генерирует Popup
-
-
 export {
-  generateMovie,
-  generateMovies,
-  moviesBlock,
-  moviePopup
+  generateFilm,
+  generateFilms,
+  generateFilmPopup
 };

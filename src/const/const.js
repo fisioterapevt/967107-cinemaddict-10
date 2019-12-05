@@ -1,4 +1,4 @@
-export const MovieNames = [
+export const FilmNames = [
   `The Godfather`,
   `The Shawshank Redemption`,
   `Schindler's List`,
@@ -16,7 +16,7 @@ export const MovieNames = [
   `Blade Runner`
 ];
 
-export const MovieDiscription = (
+export const FilmDiscription = (
   `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
   Cras aliquet varius magna, non porta ligula feugiat eget. 
   Fusce tristique felis at fermentum pharetra. Aliquam id orci ut lectus varius viverra. 
@@ -27,7 +27,7 @@ export const MovieDiscription = (
   Nunc fermentum tortor ac porta dapibus. In rutrum ac purus sit amet tempus.`
 );
 
-export const MoviePosters = [
+export const FilmPosters = [
   `made-for-each-other.png`,
   `popeye-meets-sinbad.png`,
   `sagebrush-trail.jpg`,
@@ -37,7 +37,7 @@ export const MoviePosters = [
   `the-man-with-the-golden-arm.jpg`
 ];
 
-export const MovieGenres = [
+export const FilmGenres = [
   `Music`,
   `Comedy`,
   `Drama`,

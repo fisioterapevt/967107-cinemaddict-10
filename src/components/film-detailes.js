@@ -1,6 +1,6 @@
 
-export const createMovieDetailesTemplate = (moviePopup) => {
-  const {nameMovie, ageRestricted, posterMovie, director, writer, actor, duration, country, genre, rating, description, countComments} = moviePopup;
+export const createFilmDetailesTemplate = (filmPopup) => {
+  const {nameFilm, ageRestricted, posterFilm, director, writer, actor, duration, country, genre, rating, description, countComments} = filmPopup;
   return (
     `<section class="film-details">
     <form class="film-details__inner" action="" method="get">
@@ -10,7 +10,7 @@ export const createMovieDetailesTemplate = (moviePopup) => {
         </div>
         <div class="film-details__info-wrap">
             <div class="film-details__poster">
-            <img class="film-details__poster-img" src="./images/posters/${posterMovie}" alt="">
+            <img class="film-details__poster-img" src="./images/posters/${posterFilm}" alt="">
 
             <p class="film-details__age">${ageRestricted}</p>
             </div>
@@ -18,8 +18,8 @@ export const createMovieDetailesTemplate = (moviePopup) => {
             <div class="film-details__info">
             <div class="film-details__info-head">
                 <div class="film-details__title-wrap">
-                <h3 class="film-details__title">${nameMovie}</h3>
-                <p class="film-details__title-original">Original: ${nameMovie}</p>
+                <h3 class="film-details__title">${nameFilm}</h3>
+                <p class="film-details__title-original">Original: ${nameFilm}</p>
                 </div>
 
                 <div class="film-details__rating">
