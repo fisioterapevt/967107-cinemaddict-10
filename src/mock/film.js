@@ -9,7 +9,7 @@ import {
   Countries
 } from '../const/const';
 
-const arrDescription = FilmDiscription.split(`. `); // разбивает общее описание на массив предложений
+const descriptionSentences = FilmDiscription.split(`. `); // разбивает общее описание на массив предложений
 
 const getRandomArrayItem = (array) => { // возвращает рандомное количество элементов в array
   const randomIndex = getRandomNumber(0, array.length - 1);
@@ -28,7 +28,7 @@ const generateFilm = () => {
   return {
     name: getRandomArrayItem(FilmNames),
     poster: getRandomArrayItem(FilmPosters),
-    description: getRandomArray(arrDescription, getRandomNumber(1, 3)),
+    description: getRandomArray(descriptionSentences, getRandomNumber(1, 3)),
     rating: getRandomNumber(0, 10),
     year: getRandomNumber(1950, 2019),
     duration: {
@@ -51,7 +51,7 @@ const generateFilms = (count, foo) => {
 
 const generateFilmPopup = () => { // генерирует данные для Popup
   return {
-    nameFilm: getRandomArrayItem(FilmNames),
+    name: getRandomArrayItem(FilmNames),
     posterFilm: getRandomArrayItem(FilmPosters),
     ageRestricted: Math.random() > 0.5 ? `18+` : ``,
     original: getRandomArrayItem(FilmNames),
