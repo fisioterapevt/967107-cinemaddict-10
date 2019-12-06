@@ -1,4 +1,3 @@
-
 export const createFilmCardTemplate = (film) => {
   const {name, poster, description, rating, year, duration, genre, countComments} = film;
 

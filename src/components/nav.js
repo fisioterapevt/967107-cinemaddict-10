@@ -1,4 +1,3 @@
-
 export const createNavTemplate = (films) => {
 // фильтруем и создаем array из фильмов помеченных как favorites, получем количество фильмов
   const isFavoriteCount = films.filter((film) => film.isFavorite === true).length;

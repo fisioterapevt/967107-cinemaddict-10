@@ -1,4 +1,3 @@
-
 export const createHeaderProfileTemplate = (films) => {
   const isWatchedCount = films.filter((film) => film.isWatched === true).length;
 

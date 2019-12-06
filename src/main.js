@@ -21,7 +21,6 @@ const generateFilms = (count, foo) => {
     .map(foo);
 };
 
-
 const films = generateFilms(FILMS_COUNT, generateFilm); // генерирует блок фильмов
 
 const render = (container, template, place = `beforeend`) => {
@@ -50,7 +49,6 @@ const siteFilmsTopRatedContainerElement = siteFilmsTopRated.querySelector(`.film
 const siteFilmsMostCommentedElement = siteFilmsMostCommented.querySelector(`.films-list__container`);
 
 // БЛОК ДЕЙСТВИЙ С КАРТОЧКАМИ ФИЛЬМОВ
-
 let showingFilmsCount = FILMS_COUNT_AT_FIRST;
 
 // отрисовывает фильмы на странице в основной блок
@@ -60,16 +58,16 @@ films.slice(0, showingFilmsCount)
 const siteFilmCard = siteFilmsContainerElement.querySelectorAll(`.film-card`);
 
 // отрисовывает фильмы на странице в блок лучший рейтинг
-const topRatedlist = films
+const topRatedFilms = films
   .filter((film) => film.rating !== 0)
   .sort((a, b) => b.rating - a.rating)// сортирует массив по убыванию
   .slice(0, TOP_RATED_COUNT); // вырезает количество элементов от 1 до TOP_RATED_COUNT
 
-if (topRatedlist.length <= 0) {
+if (topRatedFilms.length <= 0) {
   siteFilmsTopRated.remove();
 }
 
-topRatedlist.forEach((film) => render(siteFilmsTopRatedContainerElement, createFilmCardTemplate(film)));
+topRatedFilms.forEach((film) => render(siteFilmsTopRatedContainerElement, createFilmCardTemplate(film)));
 
 // отрисовывает фильмы на странице в блок наибольших комментарий
 const mostCommentedFilms = films
@@ -99,7 +97,6 @@ loadMoreButton.addEventListener(`click`, () => {
 });
 
 // БЛОК ДЕЙСТВИЙ С POPUP
-
 const onPopupOpenAndClose = () => { // открывает и закрывает попап
   render(siteFooterElement, createFilmDetailsTemplate(generateFilmPopup()));// отрисовывает попап
   const buttonPopupClose = document.querySelector(`.film-details__close-btn`);
