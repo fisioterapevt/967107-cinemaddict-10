@@ -26,8 +26,8 @@ const getRandomArray = (arr, count) => arr.sort(() => Math.random() - 0.5).slice
 const generateFilm = () => {
 
   return {
-    nameFilm: getRandomArrayItem(FilmNames),
-    posterFilm: getRandomArrayItem(FilmPosters),
+    name: getRandomArrayItem(FilmNames),
+    poster: getRandomArrayItem(FilmPosters),
     description: getRandomArray(arrDescription, getRandomNumber(1, 3)),
     rating: getRandomNumber(0, 10),
     year: getRandomNumber(1950, 2019),
