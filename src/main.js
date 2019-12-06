@@ -6,8 +6,8 @@ import {createButtonShowMoreTemplate} from './components/button-show';
 import {createFilmsTopRatedTemplate} from './components/film-top-rated';
 import {createFilmsMostCommentedTemplate} from './components/film-most-commented';
 import {createFilmCardTemplate} from './components/film-card';
-import {createFilmDetailesTemplate} from './components/film-detailes';
-import {generateFilm, generateFilms, generateFilmPopup} from './mock/film';
+import {createFilmDetailsTemplate} from './components/film-details';
+import {generateFilm, generateFilmPopup} from './mock/film';
 
 const FILMS_COUNT = 15; // количество фильмов
 const TOP_RATED_COUNT = 2;
@@ -15,7 +15,14 @@ const MOST_COMMENTED_COUNT = 2;
 const FILMS_COUNT_AT_FIRST = 5;
 const COUNT_FILMS_LOAD_MORE = 5;
 
-const filmsBlock = generateFilms(FILMS_COUNT, generateFilm); // генерирует блок фильмов
+const generateFilms = (count, foo) => {
+  return new Array(count)
+    .fill(``)
+    .map(foo);
+};
+
+
+const films = generateFilms(FILMS_COUNT, generateFilm); // генерирует блок фильмов
 
 const render = (container, template, place = `beforeend`) => {
   container.insertAdjacentHTML(place, template);
@@ -25,8 +32,8 @@ const siteHeaderElement = document.querySelector(`.header`);
 const siteMainElement = document.querySelector(`.main`);
 const siteFooterElement = document.querySelector(`.footer`);
 
-render(siteHeaderElement, createHeaderProfileTemplate(filmsBlock));
-render(siteMainElement, createNavTemplate(filmsBlock));
+render(siteHeaderElement, createHeaderProfileTemplate(films));
+render(siteMainElement, createNavTemplate(films));
 render(siteMainElement, createFiltersTemplate());
 render(siteMainElement, createFilmsBlockTemplate());
 
@@ -47,25 +54,25 @@ const siteFilmsMostCommentedElement = siteFilmsMostCommented.querySelector(`.fil
 let showingFilmsCount = FILMS_COUNT_AT_FIRST;
 
 // отрисовывает фильмы на странице в основной блок
-filmsBlock.slice(0, showingFilmsCount)
+films.slice(0, showingFilmsCount)
   .forEach((film) => render(siteFilmsContainerElement, createFilmCardTemplate(film)));
 
 const siteFilmCard = siteFilmsContainerElement.querySelectorAll(`.film-card`);
 
 // отрисовывает фильмы на странице в блок лучший рейтинг
-const arrTopRatedlist = filmsBlock
+const topRatedlist = films
   .filter((film) => film.rating !== 0)
   .sort((a, b) => b.rating - a.rating)// сортирует массив по убыванию
   .slice(0, TOP_RATED_COUNT); // вырезает количество элементов от 1 до TOP_RATED_COUNT
 
-if (arrTopRatedlist.length <= 0) {
+if (topRatedlist.length <= 0) {
   siteFilmsTopRated.remove();
 }
 
-arrTopRatedlist.forEach((film) => render(siteFilmsTopRatedContainerElement, createFilmCardTemplate(film)));
+topRatedlist.forEach((film) => render(siteFilmsTopRatedContainerElement, createFilmCardTemplate(film)));
 
 // отрисовывает фильмы на странице в блок наибольших комментарий
-const mostCommentedFilms = filmsBlock
+const mostCommentedFilms = films
   .filter((film) => film.countComments !== 0)
   .sort((a, b) => b.countComments - a.countComments) // сортирует по убыванию
   .slice(0, MOST_COMMENTED_COUNT); // вырезает количество элементов от 1 до MOST_COMMENTED_COUNT
@@ -83,10 +90,10 @@ loadMoreButton.addEventListener(`click`, () => {
   const prevFilmsCount = showingFilmsCount;
   showingFilmsCount = showingFilmsCount + COUNT_FILMS_LOAD_MORE;
 
-  filmsBlock.slice(prevFilmsCount, showingFilmsCount)
+  films.slice(prevFilmsCount, showingFilmsCount)
     .forEach((film) => render(siteFilmsContainerElement, createFilmCardTemplate(film)));
 
-  if (showingFilmsCount >= filmsBlock.length) {
+  if (showingFilmsCount >= films.length) {
     loadMoreButton.remove();
   }
 });
@@ -94,7 +101,7 @@ loadMoreButton.addEventListener(`click`, () => {
 // БЛОК ДЕЙСТВИЙ С POPUP
 
 const onPopupOpenAndClose = () => { // открывает и закрывает попап
-  render(siteFooterElement, createFilmDetailesTemplate(generateFilmPopup()));// отрисовывает попап
+  render(siteFooterElement, createFilmDetailsTemplate(generateFilmPopup()));// отрисовывает попап
   const buttonPopupClose = document.querySelector(`.film-details__close-btn`);
   buttonPopupClose.addEventListener(`click`, () => {
     const closePopup = document.querySelector(`.film-details`);

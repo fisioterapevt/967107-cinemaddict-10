@@ -43,16 +43,10 @@ const generateFilm = () => {
   };
 };
 
-const generateFilms = (count, foo) => {
-  return new Array(count)
-    .fill(``)
-    .map(foo);
-};
-
 const generateFilmPopup = () => { // генерирует данные для Popup
   return {
     name: getRandomArrayItem(FilmNames),
-    posterFilm: getRandomArrayItem(FilmPosters),
+    poster: getRandomArrayItem(FilmPosters),
     ageRestricted: Math.random() > 0.5 ? `18+` : ``,
     original: getRandomArrayItem(FilmNames),
     director: getRandomArrayItem(Directors),
@@ -73,6 +67,5 @@ const generateFilmPopup = () => { // генерирует данные для Po
 
 export {
   generateFilm,
-  generateFilms,
   generateFilmPopup
 };
