@@ -1,6 +1,5 @@
 import {createElement} from '../utils/utils';
 
-
 const createFilmsTopRatedTemplate = () => {
   return (
     `<section class="films-list--extra">

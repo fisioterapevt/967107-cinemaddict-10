@@ -1,6 +1,5 @@
 import {createElement} from '../utils/utils';
 
-
 const createFiltersTemplate = () => {
   return (
     `<ul class="sort">
