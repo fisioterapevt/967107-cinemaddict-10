@@ -84,3 +84,10 @@ export const Countries = [
   `England`,
   `Germany`
 ];
+
+export const RenderPosition = {
+  AFTERBEGIN: `afterbegin`,
+  BEFOREEND: `beforeend`
+};
+
+export const ECS_KEYCODE = `Escape` || `Esc`;
