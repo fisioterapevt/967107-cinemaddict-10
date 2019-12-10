@@ -30,6 +30,7 @@ const generateFilm = () => {
     poster: getRandomArrayItem(FilmPosters),
     description: getRandomArray(descriptionSentences, getRandomNumber(1, 3)),
     rating: getRandomNumber(0, 10),
+    // rating: 0,
     year: getRandomNumber(1950, 2019),
     duration: {
       hour: getRandomNumber(0, 1),
@@ -39,33 +40,18 @@ const generateFilm = () => {
     countComments: getRandomNumber(0, 20),
     isFavorite: Math.random() > 0.8,
     isWatched: Math.random() > 0.3,
-    isWatchList: Math.random() > 0.4
-  };
-};
-
-const generateFilmPopup = () => { // генерирует данные для Popup
-  return {
-    name: getRandomArrayItem(FilmNames),
-    poster: getRandomArrayItem(FilmPosters),
+    isWatchList: Math.random() > 0.4,
     ageRestricted: Math.random() > 0.5 ? `18+` : ``,
     original: getRandomArrayItem(FilmNames),
     director: getRandomArrayItem(Directors),
     writer: getRandomArray(Writers, getRandomNumber(1, 3)),
     actor: getRandomArray(Actors, getRandomNumber(2, 4)),
-    year: getRandomNumber(1950, 2019),
-    duration: {
-      hour: getRandomNumber(0, 1),
-      min: getRandomNumber(0, 60)
-    },
     country: getRandomArrayItem(Countries),
-    genre: getRandomArray(FilmGenres, getRandomNumber(1, 3)),
-    description: FilmDiscription,
-    rating: getRandomNumber(0, 10),
-    countComments: getRandomNumber(0, 20)
+    genreInf: getRandomArray(FilmGenres, getRandomNumber(1, 3)),
+    descriptionFull: FilmDiscription
   };
 };
 
 export {
-  generateFilm,
-  generateFilmPopup
+  generateFilm
 };
