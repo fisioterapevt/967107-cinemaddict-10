@@ -106,7 +106,7 @@ const mostCommentedFilms = films
   .slice(0, MOST_COMMENTED_COUNT); // вырезает количество элементов от 1 до MOST_COMMENTED_COUNT
 
 if (mostCommentedFilms.length <= 0) {
-  filmsMostCommentedComponent.remove();
+  filmsMostCommentedComponent.getElement().remove();
 }
 
 mostCommentedFilms.forEach((film) => render(siteFilmsMostCommentedContainerElement, new FilmCardComponent(film).getElement(), RenderPosition.BEFOREEND)); // отрисовывает фильмы в блок Most сommented
