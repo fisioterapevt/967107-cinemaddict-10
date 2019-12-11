@@ -1,4 +1,4 @@
-import {createElement} from '../utils/utils';
+import {createElement} from '../utils/elements';
 
 const createFilmDetailsPopupTemplate = (film) => {
   const {name, ageRestricted, poster, director, writer, actor, duration, country, genre, rating, description, countComments} = film;
