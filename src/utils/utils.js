@@ -18,14 +18,7 @@ const render = (container, element, place) => { // вставляет элеме
   }
 };
 
-const generateList = (count, elem) => {
-  return new Array(count)
-    .fill(``)
-    .map(elem);
-};
-
 export {
   createElement,
-  render,
-  generateList
+  render
 };

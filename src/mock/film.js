@@ -30,7 +30,6 @@ const generateFilm = () => {
     poster: getRandomArrayItem(FilmPosters),
     description: getRandomArray(descriptionSentences, getRandomNumber(1, 3)),
     rating: getRandomNumber(0, 10),
-    // rating: 0,
     year: getRandomNumber(1950, 2019),
     duration: {
       hour: getRandomNumber(0, 1),
