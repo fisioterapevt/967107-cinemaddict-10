@@ -6,7 +6,7 @@ const createNoDataFilmsTemplate = () => {
   );
 };
 
-export default class NoData {
+export default class NoFilms {
   constructor() {
     this.element = null;
   }
