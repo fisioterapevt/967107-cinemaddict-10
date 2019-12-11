@@ -7,6 +7,7 @@ import FilmsTopRatedComponent from './components/film-top-rated';
 import FilmsMostCommentedComponent from './components/film-most-commented';
 import FilmCardComponent from './components/film-card';
 import FilmDetailsPopupComponent from './components/film-details';
+import NoFilmsComponent from './components/film-no-data';
 import {generateFilm} from './mock/film';
 import {RenderPosition, ECS_KEYCODE} from './const/const';
 import {render, generateList} from './utils/utils';
@@ -105,7 +106,7 @@ const mostCommentedFilms = films
   .slice(0, MOST_COMMENTED_COUNT); // вырезает количество элементов от 1 до MOST_COMMENTED_COUNT
 
 if (mostCommentedFilms.length <= 0) {
-  filmsMostCommentedComponent.remove();
+  filmsMostCommentedComponent.getElement().remove();
 }
 
 mostCommentedFilms.forEach((film) => render(siteFilmsMostCommentedContainerElement, new FilmCardComponent(film).getElement(), RenderPosition.BEFOREEND)); // отрисовывает фильмы в блок Most сommented
@@ -113,6 +114,11 @@ mostCommentedFilms.forEach((film) => render(siteFilmsMostCommentedContainerEleme
 // отрисовывает дополнительные блоки с фильмами на странице
 const buttonShowComponent = new ButtonShowMoreComponent();
 render(siteFilmsListElement, buttonShowComponent.getElement(), RenderPosition.BEFOREEND);
+
+if (films.length <= 0) { // проверяет отсутствие фильмов в базе, выводит сообщение, скрывает кнопку Show more
+  render(siteFilmsContainerElement, new NoFilmsComponent().getElement(), RenderPosition.BEFOREEND);
+  buttonShowComponent.getElement().remove();
+}
 
 buttonShowComponent.getElement().addEventListener(`click`, () => {
   const prevFilmsCount = showingFilmsCount;
