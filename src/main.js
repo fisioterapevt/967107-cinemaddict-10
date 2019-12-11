@@ -10,7 +10,8 @@ import FilmDetailsPopupComponent from './components/film-details';
 import NoFilmsComponent from './components/film-no-data';
 import {generateFilm} from './mock/film';
 import {RenderPosition, ECS_KEYCODE} from './const/const';
-import {render, generateList} from './utils/utils';
+import {render} from './utils/utils';
+import {generateList} from './utils/lists';
 
 const FILMS_COUNT = 15; // количество фильмов
 const TOP_RATED_COUNT = 2;
