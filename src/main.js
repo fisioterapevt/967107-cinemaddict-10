@@ -33,7 +33,7 @@ const renderFilm = (siteFilmsContainerElement, film) => {
     const btnPopupClose = filmDetailsPopupComponent.getElement().querySelector(`.film-details__close-btn`);
 
     const closePopup = () => { // закрывает попап кликом на крестик
-      filmDetailsPopupComponent.getElement().remove();
+      siteFooterElement.removeChild(filmDetailsPopupComponent.getElement());
     };
 
     const onEcsKeyDown = (evt) => { // закрывает попап клавишей Esc
@@ -90,7 +90,7 @@ const topRatedFilms = films // сортирует и создает массив
   .slice(0, TOP_RATED_COUNT); // вырезает количество элементов от 1 до TOP_RATED_COUNT
 
 if (topRatedFilms.length <= 0) {
-  filmsTopRatedComponent.getElement().remove(); // удаляет блок Top rated
+  siteFilmsBlock.removeChild(filmsTopRatedComponent.getElement()); // удаляет блок Top rated
 }
 
 topRatedFilms.forEach((film) => render(siteFilmsTopRatedContainerElement, new FilmCardComponent(film).getElement(), RenderPosition.BEFOREEND)); // отрисовывает фильмы в блок Top rated
@@ -107,7 +107,7 @@ const mostCommentedFilms = films
   .slice(0, MOST_COMMENTED_COUNT); // вырезает количество элементов от 1 до MOST_COMMENTED_COUNT
 
 if (mostCommentedFilms.length <= 0) {
-  filmsMostCommentedComponent.getElement().remove();
+  siteFilmsBlock.removeChild(filmsMostCommentedComponent.getElement());
 }
 
 mostCommentedFilms.forEach((film) => render(siteFilmsMostCommentedContainerElement, new FilmCardComponent(film).getElement(), RenderPosition.BEFOREEND)); // отрисовывает фильмы в блок Most сommented
@@ -118,7 +118,7 @@ render(siteFilmsListElement, buttonShowComponent.getElement(), RenderPosition.BE
 
 if (films.length <= 0) { // проверяет отсутствие фильмов в базе, выводит сообщение, скрывает кнопку Show more
   render(siteFilmsContainerElement, new NoFilmsComponent().getElement(), RenderPosition.BEFOREEND);
-  buttonShowComponent.getElement().remove();
+  siteFilmsListElement.removeChild(buttonShowComponent.getElement());
 }
 
 buttonShowComponent.getElement().addEventListener(`click`, () => {
@@ -129,6 +129,6 @@ buttonShowComponent.getElement().addEventListener(`click`, () => {
     .forEach((film) => renderFilm(siteFilmsContainerElement, film));
 
   if (showingFilmsCount >= films.length) {
-    buttonShowComponent.getElement().remove();
+    siteFilmsListElement.removeChild(buttonShowComponent.getElement());
   }
 });
