@@ -9,7 +9,7 @@ import FilmCardComponent from './components/film-card';
 import FilmDetailsPopupComponent from './components/film-details';
 import {generateFilm} from './mock/film';
 import {RenderPosition, ECS_KEYCODE} from './const/const';
-import {render} from './utils/utils';
+import {render} from './utils/renders';
 import {generateList} from './utils/lists';
 
 const FILMS_COUNT = 15; // количество фильмов

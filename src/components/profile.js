@@ -1,4 +1,4 @@
-import {createElement} from '../utils/utils';
+import {createElement} from '../utils/elements';
 
 const createHeaderProfileTemplate = (films) => {
   const isWatchedCount = films.filter((film) => film.isWatched).length;

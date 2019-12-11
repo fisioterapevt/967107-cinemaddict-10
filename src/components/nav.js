@@ -1,4 +1,4 @@
-import {createElement} from '../utils/utils';
+import {createElement} from '../utils/elements';
 
 const createNavTemplate = (films) => {
 // фильтруем и создаем array из фильмов помеченных как favorites, получем количество фильмов
