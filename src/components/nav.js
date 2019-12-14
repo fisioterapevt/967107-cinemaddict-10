@@ -1,4 +1,4 @@
-import {createElement} from '../utils/elements';
+import AbstractComponent from '../components/abstract-component';
 
 const createNavTemplate = (films) => {
 // фильтруем и создаем array из фильмов помеченных как favorites, получем количество фильмов
@@ -17,25 +17,13 @@ const createNavTemplate = (films) => {
   );
 };
 
-export default class Nav {
+export default class Nav extends AbstractComponent {
   constructor(films) {
+    super();
     this._films = films;
-    this._element = null;
   }
 
   getTemplate() { // возвращает разметку
     return createNavTemplate(this._films);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

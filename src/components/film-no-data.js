@@ -1,4 +1,4 @@
-import {createElement} from '../utils/elements';
+import AbstractComponent from '../components/abstract-component';
 
 const createNoDataFilmsTemplate = () => {
   return (
@@ -6,23 +6,8 @@ const createNoDataFilmsTemplate = () => {
   );
 };
 
-export default class NoFilms {
-  constructor() {
-    this.element = null;
-  }
+export default class NoFilms extends AbstractComponent {
   getTemplate() { // возвращает разметку
     return createNoDataFilmsTemplate();
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

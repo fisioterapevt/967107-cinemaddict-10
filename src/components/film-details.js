@@ -1,4 +1,4 @@
-import {createElement} from '../utils/elements';
+import AbstractComponent from '../components/abstract-component';
 
 const createFilmDetailsPopupTemplate = (film) => {
   const {name, ageRestricted, poster, director, writer, actor, duration, country, genre, rating, description, countComments} = film;
@@ -128,25 +128,18 @@ const createFilmDetailsPopupTemplate = (film) => {
   );
 };
 
-export default class FilmDetailsPopup {
+export default class FilmDetailsPopup extends AbstractComponent {
   constructor(film) {
+    super();
     this._film = film;
-    this._element = null;
   }
 
   getTemplate() { // возвращает разметку
     return createFilmDetailsPopupTemplate(this._film);
   }
 
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
+  onSetButtonCloseClick(evt) {
+    this.getElement().querySelector(`.film-details__close-btn`)
+    .addEventListener(`click`, evt);
   }
 }

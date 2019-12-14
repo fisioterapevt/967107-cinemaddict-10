@@ -1,33 +1,13 @@
-import {createElement} from '../utils/elements';
+import AbstractComponent from '../components/abstract-component';
 
 const createFilmsBlockTemplate = () => {
   return (
-    `<section class="films">
-        <section class="films-list">
-          <h2 class="films-list__title visually-hidden">All films. Upcoming</h2>
-          <div class="films-list__container"></div>
-        </section>
-      </section>`
+    `<section class="films"></section>`
   );
 };
 
-export default class FilmsBlock {
-  constructor() {
-    this._element = null;
-  }
-
+export default class FilmsBlock extends AbstractComponent {
   getTemplate() {
     return createFilmsBlockTemplate();
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

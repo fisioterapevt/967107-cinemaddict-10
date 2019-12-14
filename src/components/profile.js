@@ -1,4 +1,4 @@
-import {createElement} from '../utils/elements';
+import AbstractComponent from '../components/abstract-component';
 
 const createHeaderProfileTemplate = (films) => {
   const isWatchedCount = films.filter((film) => film.isWatched).length;
@@ -11,25 +11,13 @@ const createHeaderProfileTemplate = (films) => {
   );
 };
 
-export default class HeaderProfile {
+export default class HeaderProfile extends AbstractComponent {
   constructor(films) {
+    super();
     this._films = films;
-    this._element = null;
   }
 
   getTemplate() { // возвращает разметку
     return createHeaderProfileTemplate(this._films);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }
