@@ -8,7 +8,6 @@ import {generateFilm} from './mock/film';
 import {RenderPosition} from './const/const';
 import {render, generateList} from './utils/render';
 
-
 const FILMS_COUNT = 15; // количество фильмов
 
 const siteHeaderElement = document.querySelector(`.header`);
@@ -24,7 +23,6 @@ render(siteMainElement, filtersComponent, RenderPosition.BEFOREEND);
 
 const filmsBlockComponent = new FilmsBlockComponent();
 render(siteMainElement, filmsBlockComponent, RenderPosition.BEFOREEND);
-
 
 const pageController = new PageController(filmsBlockComponent);
 pageController.render(films);

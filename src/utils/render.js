@@ -19,5 +19,5 @@ export const generateList = (count, elem) => {
 
 export const remove = (component) => {
   component.getElement().remove();
-  // component.removeElement();
+  component.removeElement();
 };

@@ -6,16 +6,15 @@ import NoFilmsComponent from '../components/film-no-data';
 import FilmsBlockComponent from '../components/film-block';
 import FilmsTopRatedComponent from '../components/film-top-rated';
 import FilmsMostCommentedComponent from '../components/film-most-commented';
-
 import FilmsListContainerComponent from '../components/films-list';
+
+import {RenderPosition, ECS_KEYCODE} from '../const/const';
+import {render, remove} from '../utils/render';
 
 const TOP_RATED_COUNT = 2;
 const MOST_COMMENTED_COUNT = 2;
 const FILMS_COUNT_AT_FIRST = 5;
 const COUNT_FILMS_LOAD_MORE = 5;
-
-import {RenderPosition, ECS_KEYCODE} from '../const/const';
-import {render, remove} from '../utils/render';
 
 const siteFooterElement = document.querySelector(`.footer`);
 
@@ -49,12 +48,11 @@ const renderFilm = (filmsContainer, film) => {
 };
 
 // создает список карточек фильмов
-const renderFilms = (filmsListContainer, films) => { 
+const renderFilms = (filmsListContainer, films) => {
   films.forEach((film) => {
     renderFilm(filmsListContainer, film);
   });
 };
-
 
 export default class PageController {
   constructor(container) {
