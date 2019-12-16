@@ -11,12 +11,6 @@ export const render = (container, component, place) => { // вставляет �
   }
 };
 
-export const generateList = (count, elem) => {
-  return new Array(count)
-    .fill(``)
-    .map(elem);
-};
-
 export const remove = (component) => {
   component.getElement().remove();
   component.removeElement();

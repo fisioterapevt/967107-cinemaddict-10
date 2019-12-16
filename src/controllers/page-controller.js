@@ -1,4 +1,3 @@
-
 import FilmCardComponent from '../components/film-card';
 import FilmDetailsPopupComponent from '../components/film-details';
 import ButtonShowMoreComponent from '../components/button-show';
@@ -7,9 +6,8 @@ import FilmsBlockComponent from '../components/film-block';
 import FilmsTopRatedComponent from '../components/film-top-rated';
 import FilmsMostCommentedComponent from '../components/film-most-commented';
 import FilmsListContainerComponent from '../components/films-list';
-import FiltersComponent, {FilterType} from '../components/filters';
 
-import {RenderPosition, ECS_KEYCODE} from '../const/const';
+import {RenderPosition, ESC_KEYCODE} from '../const/const';
 import {render, remove} from '../utils/render';
 
 const TOP_RATED_COUNT = 2;
@@ -21,7 +19,6 @@ const siteFooterElement = document.querySelector(`.footer`);
 
 // создает карточку фильма, навешивает обработчик клика отрисовывает попап, закрывает попап
 const renderFilm = (filmsContainer, film) => {
-
   const filmCardComponent = new FilmCardComponent(film);
   const filmDetailsPopupComponent = new FilmDetailsPopupComponent(film);
 
@@ -33,7 +30,7 @@ const renderFilm = (filmsContainer, film) => {
     };
 
     const onEcsKeyDown = (evt) => { // закрывает попап клавишей Esc
-      if (evt.key === ECS_KEYCODE) {
+      if (evt.key === ESC_KEYCODE) {
         closePopup();
       }
     };
@@ -66,7 +63,6 @@ export default class PageController {
     this._buttonShowMoreComponent = new ButtonShowMoreComponent();
     this._filmsBlockComponent = new FilmsBlockComponent();
     this._filmsListContainerComponent = new FilmsListContainerComponent();
-    this._filtersComponent = new FiltersComponent();
   }
 
   render(films) {
@@ -76,7 +72,7 @@ export default class PageController {
       render(container, this._noFilmsComponent, RenderPosition.BEFOREEND);
       remove(this._buttonShowMoreComponent);
     }
- 
+
     // отрисовывает первый блок с фильмами на странице
     let showingFilmsCount = FILMS_COUNT_AT_FIRST;
 
@@ -107,9 +103,9 @@ export default class PageController {
     const topRatedContainer = this._filmsTopRatedComponent.getElement().querySelector(`.films-list__container`);
 
     const topRatedFilms = films // сортирует и создает массив из фильмов
-    .filter((film) => film.rating !== 0)
-    .sort((a, b) => b.rating - a.rating)// сортирует массив по убыванию
-    .slice(0, TOP_RATED_COUNT); // вырезает количество элементов от 1 до TOP_RATED_COUNT
+      .filter((film) => film.rating !== 0)
+      .sort((a, b) => b.rating - a.rating)// сортирует массив по убыванию
+      .slice(0, TOP_RATED_COUNT); // вырезает количество элементов от 1 до TOP_RATED_COUNT
 
     renderFilms(topRatedContainer, topRatedFilms); // отрисовывает фильмы в блок Top rated
 
@@ -123,66 +119,14 @@ export default class PageController {
     const mostCommentedContainer = this._filmsMostCommentedComponent.getElement().querySelector(`.films-list__container`);
 
     const mostCommentedFilms = films
-    .filter((film) => film.countComments !== 0)
-    .sort((a, b) => b.countComments - a.countComments) // сортирует по убыванию
-    .slice(0, MOST_COMMENTED_COUNT); // вырезает количество элементов от 1 до MOST_COMMENTED_COUNT
+      .filter((film) => film.countComments !== 0)
+      .sort((a, b) => b.countComments - a.countComments) // сортирует по убыванию
+      .slice(0, MOST_COMMENTED_COUNT); // вырезает количество элементов от 1 до MOST_COMMENTED_COUNT
 
     if (mostCommentedFilms.length <= 0) {
       remove(this._filmsMostCommentedComponent);
     }
 
     renderFilms(mostCommentedContainer, mostCommentedFilms); // отрисовывает фильмы в блок Most сommented
-
-    // фильтрует по дате и рейтингу
-
-    this._filtersComponent.onSetFilterFilmsClick(() => {
-      alert(`work`);
-    });
-      // let sortedFilms = []; // создает массив отсортированных фильмов
-      // const sortedFilms = `click is working`;
-
-   
-      // switch (filterType) {
-      //   case FilterType.DATE:
-      //     sortedFilms = films.slice().sort((a, b) => b.year - a.year); // сортирует по дате на убывание
-      //     break;
-      //   case FilterType.RATE:
-      //     sortedFilms = films.slice().sort((a, b) => b.rating - a.rating); // сортирует по рейтингу на убывание
-      //     break;
-      //   case FilterType.DEFAULT:
-      //     sortedFilms = films.slice(0, showingFilmsCount);
-      //     break;
-      // }
-      // filmsContainer.innerHTML = ``;
-      // console.log(sortedFilms);
-      // renderFilms(container, sortedFilms, RenderPosition.BEFOREEND);
-    // });
-    // this._filtersComponent.onSetFilterFilmsClick((filterType) => {
-
-
-      // let sortedFilms = []; // создает массив отсортированных фильмов
-
-      // switch (filterType) {
-      //   case FilterType.DATE:
-      //     sortedFilms = films.slice().sort((a, b) => b.year - a.year); // сортирует по дате на убывание
-      //     break;
-      //   case FilterType.RATE:
-      //     sortedFilms = films.slice().sort((a, b) => b.rating - a.rating); // // сортирует по рейтингу на убывание
-      //     break;
-      //   case FilterType.DEFAULT:
-      //     sortedFilms = films.slice(0, showingFilmsCount);
-      //     break;
-      // }
-
-      // filmsContainer.innerHTML = ``;
-
-      // renderFilms(filmsContainer, sortedFilms);
-
-      // if (sortType === SortType.DEFAULT) {
-      //   renderLoadMoreButton();
-      // } else {
-      //   remove(this._buttonLoadMoreComponent);
-      // }
-    // });
   }
 }
