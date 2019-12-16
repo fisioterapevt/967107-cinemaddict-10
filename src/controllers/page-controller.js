@@ -7,6 +7,7 @@ import FilmsBlockComponent from '../components/film-block';
 import FilmsTopRatedComponent from '../components/film-top-rated';
 import FilmsMostCommentedComponent from '../components/film-most-commented';
 import FilmsListContainerComponent from '../components/films-list';
+import FiltersComponent, {FilterType} from '../components/filters';
 
 import {RenderPosition, ECS_KEYCODE} from '../const/const';
 import {render, remove} from '../utils/render';
@@ -65,6 +66,7 @@ export default class PageController {
     this._buttonShowMoreComponent = new ButtonShowMoreComponent();
     this._filmsBlockComponent = new FilmsBlockComponent();
     this._filmsListContainerComponent = new FilmsListContainerComponent();
+    this._filtersComponent = new FiltersComponent();
   }
 
   render(films) {
@@ -74,7 +76,7 @@ export default class PageController {
       render(container, this._noFilmsComponent, RenderPosition.BEFOREEND);
       remove(this._buttonShowMoreComponent);
     }
-
+ 
     // отрисовывает первый блок с фильмами на странице
     let showingFilmsCount = FILMS_COUNT_AT_FIRST;
 
@@ -130,5 +132,57 @@ export default class PageController {
     }
 
     renderFilms(mostCommentedContainer, mostCommentedFilms); // отрисовывает фильмы в блок Most сommented
+
+    // фильтрует по дате и рейтингу
+
+    this._filtersComponent.onSetFilterFilmsClick(() => {
+      alert(`work`);
+    });
+      // let sortedFilms = []; // создает массив отсортированных фильмов
+      // const sortedFilms = `click is working`;
+
+   
+      // switch (filterType) {
+      //   case FilterType.DATE:
+      //     sortedFilms = films.slice().sort((a, b) => b.year - a.year); // сортирует по дате на убывание
+      //     break;
+      //   case FilterType.RATE:
+      //     sortedFilms = films.slice().sort((a, b) => b.rating - a.rating); // сортирует по рейтингу на убывание
+      //     break;
+      //   case FilterType.DEFAULT:
+      //     sortedFilms = films.slice(0, showingFilmsCount);
+      //     break;
+      // }
+      // filmsContainer.innerHTML = ``;
+      // console.log(sortedFilms);
+      // renderFilms(container, sortedFilms, RenderPosition.BEFOREEND);
+    // });
+    // this._filtersComponent.onSetFilterFilmsClick((filterType) => {
+
+
+      // let sortedFilms = []; // создает массив отсортированных фильмов
+
+      // switch (filterType) {
+      //   case FilterType.DATE:
+      //     sortedFilms = films.slice().sort((a, b) => b.year - a.year); // сортирует по дате на убывание
+      //     break;
+      //   case FilterType.RATE:
+      //     sortedFilms = films.slice().sort((a, b) => b.rating - a.rating); // // сортирует по рейтингу на убывание
+      //     break;
+      //   case FilterType.DEFAULT:
+      //     sortedFilms = films.slice(0, showingFilmsCount);
+      //     break;
+      // }
+
+      // filmsContainer.innerHTML = ``;
+
+      // renderFilms(filmsContainer, sortedFilms);
+
+      // if (sortType === SortType.DEFAULT) {
+      //   renderLoadMoreButton();
+      // } else {
+      //   remove(this._buttonLoadMoreComponent);
+      // }
+    // });
   }
 }
