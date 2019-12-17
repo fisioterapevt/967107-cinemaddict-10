@@ -35,12 +35,12 @@ const renderFilm = (filmsContainer, film) => {
       }
     };
     document.addEventListener(`keydown`, onEcsKeyDown); // отлавливает событие нажатия на кнопку Esc
-    filmDetailsPopupComponent.onSetButtonCloseClick(closePopup); // отлавливает событие нажатия на кнопку закрытия попапа
+    filmDetailsPopupComponent.setClickOnButtonClosePopup(closePopup); // реализует метод закрытия попапа при  клике на кнопку закрытия попапа
   };
 
-  filmCardComponent.onSetFilmCardClick(openPopup, `.film-card__poster`); // навешивает обработчик события на картинку фильма
-  filmCardComponent.onSetFilmCardClick(openPopup, `.film-card__title`); // навешивает обработчик на название фильма
-  filmCardComponent.onSetFilmCardClick(openPopup, `.film-card__comments`); // навешивает обработчик на комментарии фильма
+  filmCardComponent.setClickOnPosterHandler(openPopup); // реализует метод для открытия попапа при клике на картинку фильма
+  filmCardComponent.setClickOnTitleHandler(openPopup); // реализует метод для открытия попапа при клике  на название фильма
+  filmCardComponent.setClickOnCommentsHandler(openPopup); // реализует метод для открытия попапа при клике  на комментарии к фильму
 
   render(filmsContainer, filmCardComponent, RenderPosition.BEFOREEND); // отрисовывает карточку фильма
 };
@@ -86,7 +86,7 @@ export default class PageController {
     render(container, this._filmsListContainerComponent, RenderPosition.BEFOREEND);
 
     // отрисовывает дополнительные блоки с фильмами на странице при клике на кнопку Show more
-    this._buttonShowMoreComponent.onSetClick(() => { // слушает клик на кнопку Show more
+    this._buttonShowMoreComponent.setClickOnButtonShowMoreHandler(() => { // реализует метод показа дополнительного блока фильма при клике на кнопку Show more
       const prevFilmsCount = showingFilmsCount;
       showingFilmsCount = showingFilmsCount + COUNT_FILMS_LOAD_MORE;
 
