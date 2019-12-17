@@ -7,7 +7,7 @@ import PageController from './controllers/page-controller';
 import {generateFilm} from './mock/film';
 import {RenderPosition} from './const/const';
 import {render} from './utils/render';
-import {generateList} from './utils/list-films';
+import {generateList} from './utils/lists';
 
 const FILMS_COUNT = 15; // количество фильмов
 

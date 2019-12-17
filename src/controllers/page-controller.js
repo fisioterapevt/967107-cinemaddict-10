@@ -5,7 +5,7 @@ import NoFilmsComponent from '../components/film-no-data';
 import FilmsBlockComponent from '../components/film-block';
 import FilmsTopRatedComponent from '../components/film-top-rated';
 import FilmsMostCommentedComponent from '../components/film-most-commented';
-import FilmsListContainerComponent from '../components/list';
+import FilmsListContainerComponent from '../components/films-list';
 
 import {RenderPosition, ESC_KEYCODE} from '../const/const';
 import {render, remove} from '../utils/render';
@@ -35,7 +35,7 @@ const renderFilm = (filmsContainer, film) => {
       }
     };
     document.addEventListener(`keydown`, onEcsKeyDown); // отлавливает событие нажатия на кнопку Esc
-    filmDetailsPopupComponent.setClickOnButtonClosePopup(closePopup); // реализует метод закрытия попапа при  клике на кнопку закрытия попапа
+    filmDetailsPopupComponent.setClickOnClosePopupButonHandler(closePopup); // реализует метод закрытия попапа при  клике на кнопку закрытия попапа
   };
 
   filmCardComponent.setClickOnPosterHandler(openPopup); // реализует метод для открытия попапа при клике на картинку фильма
