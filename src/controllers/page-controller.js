@@ -1,11 +1,11 @@
 import FilmCardComponent from '../components/film-card';
 import FilmDetailsPopupComponent from '../components/film-details';
-import ButtonShowMoreComponent from '../components/button-show';
+import ShowMoreButtonComponent from '../components/button-show';
 import NoFilmsComponent from '../components/film-no-data';
 import FilmsBlockComponent from '../components/film-block';
 import FilmsTopRatedComponent from '../components/film-top-rated';
 import FilmsMostCommentedComponent from '../components/film-most-commented';
-import FilmsListContainerComponent from '../components/films-list';
+import FilmsListContainerComponent from '../components/list';
 
 import {RenderPosition, ESC_KEYCODE} from '../const/const';
 import {render, remove} from '../utils/render';
@@ -60,7 +60,7 @@ export default class PageController {
     this._noFilmsComponent = new NoFilmsComponent();
     this._filmsTopRatedComponent = new FilmsTopRatedComponent();
     this._filmsMostCommentedComponent = new FilmsMostCommentedComponent();
-    this._buttonShowMoreComponent = new ButtonShowMoreComponent();
+    this._showMoreButtonComponent = new ShowMoreButtonComponent();
     this._filmsBlockComponent = new FilmsBlockComponent();
     this._filmsListContainerComponent = new FilmsListContainerComponent();
   }
@@ -70,7 +70,7 @@ export default class PageController {
     // проверяет отсутствие фильмов в базе, выводит сообщение, скрывает кнопку Show more
     if (films.length <= 0) {
       render(container, this._noFilmsComponent, RenderPosition.BEFOREEND);
-      remove(this._buttonShowMoreComponent);
+      remove(this._showMoreButtonComponent);
     }
 
     // отрисовывает первый блок с фильмами на странице
@@ -80,20 +80,20 @@ export default class PageController {
     // создает первый блок с фильмами
     renderFilms(filmsContainer, films.slice(0, showingFilmsCount));
     // отрисовывает кнопку Show more в блок  film-list
-    render(this._filmsListContainerComponent.getElement(), this._buttonShowMoreComponent, RenderPosition.BEFOREEND);
+    render(this._filmsListContainerComponent.getElement(), this._showMoreButtonComponent, RenderPosition.BEFOREEND);
 
     // отрисовывает первый блок с фильмами  и кнопкой на странице
     render(container, this._filmsListContainerComponent, RenderPosition.BEFOREEND);
 
     // отрисовывает дополнительные блоки с фильмами на странице при клике на кнопку Show more
-    this._buttonShowMoreComponent.setClickOnButtonShowMoreHandler(() => { // реализует метод показа дополнительного блока фильма при клике на кнопку Show more
+    this._showMoreButtonComponent.setClickHandler(() => { // реализует метод показа дополнительного блока фильма при клике на кнопку Show more
       const prevFilmsCount = showingFilmsCount;
       showingFilmsCount = showingFilmsCount + COUNT_FILMS_LOAD_MORE;
 
       renderFilms(filmsContainer, films.slice(prevFilmsCount, showingFilmsCount));
 
       if (showingFilmsCount >= films.length) {
-        remove(this._buttonShowMoreComponent); // удаляет кнопку Show more если показаны все фильмы
+        remove(this._showMoreButtonComponent); // удаляет кнопку Show more если показаны все фильмы
       }
     });
 

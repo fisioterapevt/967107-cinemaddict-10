@@ -1,4 +1,4 @@
-import AbstractComponent from '../components/abstract-component';
+import AbstractComponent from './abstract-component';
 
 const createFilmsListTemplate = () => {
   return (
@@ -12,9 +12,5 @@ const createFilmsListTemplate = () => {
 export default class FilmsListContainer extends AbstractComponent {
   getTemplate() { // возвращает разметку
     return createFilmsListTemplate();
-  }
-
-  onSetClick(evt) {
-    this.getElement().addEventListener(`click`, evt);
   }
 }

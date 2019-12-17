@@ -1,17 +1,17 @@
 import AbstractComponent from '../components/abstract-component';
 
-const createButtonShowMoreTemplate = () => {
+const createShowMoreButtonTemplate = () => {
   return (
     `<button class="films-list__show-more">Show more</button>`
   );
 };
 
-export default class ButtonShowMore extends AbstractComponent {
+export default class ShowMoreButton extends AbstractComponent {
   getTemplate() { // возвращает разметку
-    return createButtonShowMoreTemplate();
+    return createShowMoreButtonTemplate();
   }
 
-  setClickOnButtonShowMoreHandler(handler) {
+  setClickHandler(handler) {
     this.getElement().addEventListener(`click`, handler);
   }
 }

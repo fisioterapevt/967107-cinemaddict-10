@@ -34,18 +34,20 @@ export default class FilmCard extends AbstractComponent {
     return createFilmCardTemplate(this._film);
   }
 
-  setClickOnPosterHandler(handler) { //  публичный метод
-    this.getElement().querySelector(`.film-card__poster`)
+  _setClickHandler(path, handler) { // приватный метод
+    this.getElement().querySelector(path)
     .addEventListener(`click`, handler);
+  }
+
+  setClickOnPosterHandler(handler) { //  публичный метод
+    this._setClickHandler(`.film-card__poster`, handler);
   }
 
   setClickOnTitleHandler(handler) {
-    this.getElement().querySelector(`.film-card__title`)
-    .addEventListener(`click`, handler);
+    this._setClickHandler(`.film-card__title`, handler);
   }
 
   setClickOnCommentsHandler(handler) {
-    this.getElement().querySelector(`.film-card__comments`)
-    .addEventListener(`click`, handler);
+    this._setClickHandler(`.film-card__comments`, handler);
   }
 }
