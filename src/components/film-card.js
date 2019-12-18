@@ -1,4 +1,4 @@
-import {createElement} from '../utils/elements';
+import AbstractComponent from '../components/abstract-component';
 
 const createFilmCardTemplate = (film) => {
   const {name, poster, description, rating, year, duration, genre, countComments} = film;
@@ -24,25 +24,30 @@ const createFilmCardTemplate = (film) => {
   );
 };
 
-export default class FilmCard {
+export default class FilmCard extends AbstractComponent {
   constructor(film) {
+    super();
     this._film = film;
-    this._element = null;
   }
 
   getTemplate() { // возвращает разметку
     return createFilmCardTemplate(this._film);
   }
 
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
+  _setClickHandler(path, handler) { // приватный метод
+    this.getElement().querySelector(path)
+    .addEventListener(`click`, handler);
   }
 
-  removeElement() {
-    this._element = null;
+  setClickOnPosterHandler(handler) { //  публичный метод
+    this._setClickHandler(`.film-card__poster`, handler);
+  }
+
+  setClickOnTitleHandler(handler) {
+    this._setClickHandler(`.film-card__title`, handler);
+  }
+
+  setClickOnCommentsHandler(handler) {
+    this._setClickHandler(`.film-card__comments`, handler);
   }
 }

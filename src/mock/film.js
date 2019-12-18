@@ -23,7 +23,7 @@ const getRandomNumber = (min, max) => { // возвращает рандомно
 // возвращает рандомно из массива предложений arr элементы  в количестве count
 const getRandomArray = (arr, count) => arr.sort(() => Math.random() - 0.5).slice(0, count).join(` `);
 
-const generateFilm = () => {
+export const generateFilm = () => {
 
   return {
     name: getRandomArrayItem(FilmNames),
@@ -49,8 +49,4 @@ const generateFilm = () => {
     genreInf: getRandomArray(FilmGenres, getRandomNumber(1, 3)),
     descriptionFull: FilmDiscription
   };
-};
-
-export {
-  generateFilm
 };
