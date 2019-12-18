@@ -132,7 +132,7 @@ export default class PageController {
     renderFilms(mostCommentedContainer, mostCommentedFilms); // отрисовывает фильмы в блок Most сommented
 
     this._filtersComponent.setClickOnFilterHandler(() => {
-      // alert(`Click`);
+      remove(this._showMoreButtonComponent);
     });
   }
 }
