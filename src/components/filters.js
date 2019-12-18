@@ -14,4 +14,8 @@ export default class Filters extends AbstractComponent {
   getTemplate() { // возвращает разметку
     return createFiltersTemplate();
   }
+
+  setClickOnFilterHandler(handler) {
+    this.getElement().addEventListener(`click`, handler);
+  }
 }

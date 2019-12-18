@@ -6,6 +6,7 @@ import FilmsBlockComponent from '../components/film-block';
 import FilmsTopRatedComponent from '../components/film-top-rated';
 import FilmsMostCommentedComponent from '../components/film-most-commented';
 import FilmsListContainerComponent from '../components/films-list';
+import FiltersComponent from '../components/filters';
 
 import {RenderPosition, ESC_KEYCODE} from '../const/const';
 import {render, remove} from '../utils/render';
@@ -63,6 +64,7 @@ export default class PageController {
     this._showMoreButtonComponent = new ShowMoreButtonComponent();
     this._filmsBlockComponent = new FilmsBlockComponent();
     this._filmsListContainerComponent = new FilmsListContainerComponent();
+    this._filtersComponent = new FiltersComponent();
   }
 
   render(films) {
@@ -128,5 +130,9 @@ export default class PageController {
     }
 
     renderFilms(mostCommentedContainer, mostCommentedFilms); // отрисовывает фильмы в блок Most сommented
+
+    this._filtersComponent.setClickOnFilterHandler(() => {
+      // alert(`Click`);
+    });
   }
 }
