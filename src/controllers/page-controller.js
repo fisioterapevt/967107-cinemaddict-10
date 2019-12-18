@@ -6,7 +6,7 @@ import FilmsBlockComponent from '../components/film-block';
 import FilmsTopRatedComponent from '../components/film-top-rated';
 import FilmsMostCommentedComponent from '../components/film-most-commented';
 import FilmsListContainerComponent from '../components/films-list';
-import FiltersComponent from '../components/filters';
+import FiltersComponent, {FilterType} from '../components/filters';
 
 import {RenderPosition, ESC_KEYCODE} from '../const/const';
 import {render, remove} from '../utils/render';
@@ -68,36 +68,42 @@ export default class PageController {
   }
 
   render(films) {
+    const renderShowMoreButton = () => {
+      if (showingFilmsCount >= films.length) {
+        return;
+      }
+      render(this._filmsListContainerComponent.getElement(), this._showMoreButtonComponent, RenderPosition.BEFOREEND);
+
+      // отрисовывает дополнительные блоки с фильмами на странице при клике на кнопку Show more
+      this._showMoreButtonComponent.setClickHandler(() => { // реализует метод показа дополнительного блока фильма при клике на кнопку Show more
+        const prevFilmsCount = showingFilmsCount;
+        showingFilmsCount = showingFilmsCount + COUNT_FILMS_LOAD_MORE;
+
+        renderFilms(filmsContainer, films.slice(prevFilmsCount, showingFilmsCount));
+
+        if (showingFilmsCount >= films.length) {
+          remove(this._showMoreButtonComponent); // удаляет кнопку Show more если показаны все фильмы
+        }
+      });
+    };
+
     const container = this._container.getElement();
     // проверяет отсутствие фильмов в базе, выводит сообщение, скрывает кнопку Show more
     if (films.length <= 0) {
       render(container, this._noFilmsComponent, RenderPosition.BEFOREEND);
       remove(this._showMoreButtonComponent);
     }
-
-    // отрисовывает первый блок с фильмами на странице
     let showingFilmsCount = FILMS_COUNT_AT_FIRST;
 
+    render(container, this._filtersComponent, RenderPosition.BEFOREEND); // отрисовывает блок с фильтрами
+
     const filmsContainer = this._filmsListContainerComponent.getElement().querySelector(`.films-list__container`);
-    // создает первый блок с фильмами
+    // отрисовывает первый блок с фильмами в контейнер film-list
     renderFilms(filmsContainer, films.slice(0, showingFilmsCount));
     // отрисовывает кнопку Show more в блок  film-list
-    render(this._filmsListContainerComponent.getElement(), this._showMoreButtonComponent, RenderPosition.BEFOREEND);
-
-    // отрисовывает первый блок с фильмами  и кнопкой на странице
+    renderShowMoreButton();
+    // отрисовывает первый блок с фильмами  и кнопкой на страницу
     render(container, this._filmsListContainerComponent, RenderPosition.BEFOREEND);
-
-    // отрисовывает дополнительные блоки с фильмами на странице при клике на кнопку Show more
-    this._showMoreButtonComponent.setClickHandler(() => { // реализует метод показа дополнительного блока фильма при клике на кнопку Show more
-      const prevFilmsCount = showingFilmsCount;
-      showingFilmsCount = showingFilmsCount + COUNT_FILMS_LOAD_MORE;
-
-      renderFilms(filmsContainer, films.slice(prevFilmsCount, showingFilmsCount));
-
-      if (showingFilmsCount >= films.length) {
-        remove(this._showMoreButtonComponent); // удаляет кнопку Show more если показаны все фильмы
-      }
-    });
 
     // отрисовывает фильмы на странице в блок лучший рейтинг
     render(container, this._filmsTopRatedComponent, RenderPosition.BEFOREEND); // отрисовывает блок Top rated
@@ -131,8 +137,33 @@ export default class PageController {
 
     renderFilms(mostCommentedContainer, mostCommentedFilms); // отрисовывает фильмы в блок Most сommented
 
-    this._filtersComponent.setClickOnFilterHandler(() => {
-      remove(this._showMoreButtonComponent);
+    // фильтрует фильмы и отрисовывает на страницу отфильтрованные блоки
+    this._filtersComponent.setClickOnFilterHandler((filterType) => {
+      showingFilmsCount = FILMS_COUNT_AT_FIRST;
+
+      let sortedFilms = []; // пустой массив для фильмов
+
+      switch (filterType) { // сортирует и записывает в массив в зависимости от нажатого фильтра
+        case FilterType.DATE:
+          sortedFilms = films.slice().sort((a, b) => b.year - a.year);
+          break;
+        case FilterType.RATE:
+          sortedFilms = films.slice().sort((a, b) => b.rating - a.rating);
+          break;
+        case FilterType.DEFAULT:
+          sortedFilms = films.slice(0, showingFilmsCount);
+          break;
+      }
+
+      filmsContainer.innerHTML = ``; // удаляет текущий блок с фильмами
+
+      renderFilms(filmsContainer, sortedFilms); // отрисовывает новый отфильтрованный блок с фильмами
+
+      if (filterType === FilterType.DEFAULT) { //
+        renderShowMoreButton();
+      } else {
+        remove(this._showMoreButtonComponent);
+      }
     });
   }
 }
