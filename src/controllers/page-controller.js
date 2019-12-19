@@ -6,7 +6,7 @@ import FilmsBlockComponent from '../components/film-block';
 import FilmsTopRatedComponent from '../components/film-top-rated';
 import FilmsMostCommentedComponent from '../components/film-most-commented';
 import FilmsListContainerComponent from '../components/films-list';
-import FiltersComponent, {FilterType} from '../components/filters';
+import SortComponent, {SortType} from '../components/sort';
 
 import {RenderPosition, ESC_KEYCODE} from '../const/const';
 import {render, remove} from '../utils/render';
@@ -64,7 +64,7 @@ export default class PageController {
     this._showMoreButtonComponent = new ShowMoreButtonComponent();
     this._filmsBlockComponent = new FilmsBlockComponent();
     this._filmsListContainerComponent = new FilmsListContainerComponent();
-    this._filtersComponent = new FiltersComponent();
+    this._sortComponent = new SortComponent();
   }
 
   render(films) {
@@ -95,7 +95,7 @@ export default class PageController {
     }
     let showingFilmsCount = FILMS_COUNT_AT_FIRST;
 
-    render(container, this._filtersComponent, RenderPosition.BEFOREEND); // отрисовывает блок с фильтрами
+    render(container, this._sortComponent, RenderPosition.BEFOREEND); // отрисовывает блок с фильтрами
 
     const filmsContainer = this._filmsListContainerComponent.getElement().querySelector(`.films-list__container`);
     // отрисовывает первый блок с фильмами в контейнер film-list
@@ -138,19 +138,19 @@ export default class PageController {
     renderFilms(mostCommentedContainer, mostCommentedFilms); // отрисовывает фильмы в блок Most сommented
 
     // фильтрует фильмы и отрисовывает на страницу отфильтрованные блоки
-    this._filtersComponent.setClickOnFilterHandler((filterType) => {
+    this._sortComponent.setClickOnSortHandler((sortType) => {
       showingFilmsCount = FILMS_COUNT_AT_FIRST;
 
       let sortedFilms = []; // пустой массив для фильмов
 
-      switch (filterType) { // сортирует и записывает в массив в зависимости от нажатого фильтра
-        case FilterType.DATE:
+      switch (sortType) { // сортирует и записывает в массив в зависимости от нажатого фильтра
+        case SortType.DATE:
           sortedFilms = films.slice().sort((a, b) => b.year - a.year);
           break;
-        case FilterType.RATE:
+        case SortType.RATE:
           sortedFilms = films.slice().sort((a, b) => b.rating - a.rating);
           break;
-        case FilterType.DEFAULT:
+        case SortType.DEFAULT:
           sortedFilms = films.slice(0, showingFilmsCount);
           break;
       }
@@ -159,7 +159,7 @@ export default class PageController {
 
       renderFilms(filmsContainer, sortedFilms); // отрисовывает новый отфильтрованный блок с фильмами
 
-      if (filterType === FilterType.DEFAULT) { //
+      if (sortType === SortType.DEFAULT) { //
         renderShowMoreButton();
       } else {
         remove(this._showMoreButtonComponent);
