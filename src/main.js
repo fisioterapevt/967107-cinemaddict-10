@@ -1,5 +1,4 @@
 import HeaderProfileComponent from './components/profile';
-import FiltersComponent from './components/filters';
 import NavComponent from './components/nav';
 import FilmsBlockComponent from './components/film-block';
 import PageController from './controllers/page-controller';
@@ -18,9 +17,6 @@ const films = generateList(FILMS_COUNT, generateFilm);// генерирует б
 
 render(siteHeaderElement, new HeaderProfileComponent(films), RenderPosition.BEFOREEND);
 render(siteMainElement, new NavComponent(films), RenderPosition.BEFOREEND);
-
-const filtersComponent = new FiltersComponent();
-render(siteMainElement, filtersComponent, RenderPosition.BEFOREEND);
 
 const filmsBlockComponent = new FilmsBlockComponent();
 render(siteMainElement, filmsBlockComponent, RenderPosition.BEFOREEND);
