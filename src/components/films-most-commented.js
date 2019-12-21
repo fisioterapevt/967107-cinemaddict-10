@@ -1,4 +1,4 @@
-import AbstractComponent from '../components/abstract-component';
+import AbstractComponent from './abstract-component';
 
 export const createFilmsMostCommentedTemplate = () => {
   return (

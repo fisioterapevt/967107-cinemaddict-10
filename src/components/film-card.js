@@ -50,4 +50,16 @@ export default class FilmCard extends AbstractComponent {
   setClickOnCommentsHandler(handler) {
     this._setClickHandler(`.film-card__comments`, handler);
   }
+
+  setClickOnAddToWatchList(handler) {
+    this._setClickHandler(`.film-card__controls-item--add-to-watchlist`, handler);
+  }
+
+  setClickOnMarkAsWatchedHandler(handler) {
+    this._setClickHandler(`.film-card__controls-item--mark-as-watched`, handler);
+  }
+
+  setClickOnControlsItemFavoriteHandler(handler) {
+    this._setClickHandler(`.film-card__controls-item--favorite`, handler);
+  }
 }
