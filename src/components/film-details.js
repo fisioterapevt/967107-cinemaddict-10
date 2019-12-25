@@ -1,4 +1,4 @@
-import AbstractSmartComponent from '../controllers/abstract-smart-component';
+import AbstractSmartComponent from './abstract-smart-component';
 // блок с рейтингом фильма
 const createFilmRatingBlock = () => {
   return (
