@@ -252,33 +252,5 @@ export default class FilmDetailsPopup extends AbstractSmartComponent {
 
         this.rerender();
       });
-
-    // const emojiSmile = document.getElementById(`emoji-smile`);
-    // alert(emojiSmile);
-  
-    //   document.getElementById(`emoji-smile`)
-    //   .addEventListener(`click`, () => {
-    //     this._isSmile = !this._isSmile;
-
-    //     this.rerender();
-    //   });
-    // document.getElementById(`emoji-sleeping`)
-    //   .addEventListener(`click`, () => {
-    //     this._isSleeping = !this._isSleeping;
-
-    //     this.rerender();
-    //   });
-    // document.getElementById(`emoji-gpuke`)
-    //   .addEventListener(`click`, () => {
-    //     this._isGpuke = !this._isGpuke;
-
-    //     this.rerender();
-    //   });
-    // document.getElementById(`emoji-angry`)
-    //   .addEventListener(`click`, () => {
-    //     this._isAngry = !this._isAngry;
-
-    //     this.rerender();
-    //   });
   }
 }
