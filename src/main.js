@@ -1,6 +1,7 @@
 import HeaderProfileComponent from './components/profile';
 import NavComponent from './components/nav';
-import FilmsBlockComponent from './components/film-block';
+import FilmsBlockComponent from './components/films-block';
+// import SortComponent from './components/sort';
 import PageController from './controllers/page-controller';
 
 import {generateFilm} from './mock/film';

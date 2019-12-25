@@ -30,7 +30,7 @@ export default class Sort extends AbstractComponent {
     this.getElement().addEventListener(`click`, (evt) => {
       evt.preventDefault();
 
-      if (evt.target.tagName !== `A`) {
+      if (evt.target.tagName !== `A`) { // если нажатая кнопка не ссылка - ничего не делать
         return;
       }
 

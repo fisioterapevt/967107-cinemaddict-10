@@ -3,13 +3,14 @@ import {createElement} from '../utils/elements';
 export default class AbstractComponent {
   constructor() {
     if (new.target === AbstractComponent) {
-      throw new Error(`Can't instantiate AbstractComponent, only concrete one.`); // создавать объекты напрямую из этого класса нельзя От него можно только наследоваться
+      throw new Error(`Can't instantiate AbstractComponent, only concrete one.`);
     }
+
     this._element = null;
   }
 
   getTemplate() {
-    throw new Error(`Abstract method not implemented: getTemplate`); // У наследников должен быть обязательно реализован метод getTemplate
+    throw new Error(`Abstract method not implemented: getTemplate`);
   }
 
   getElement() {
@@ -19,7 +20,6 @@ export default class AbstractComponent {
 
     return this._element;
   }
-
   removeElement() {
     this._element = null;
   }
