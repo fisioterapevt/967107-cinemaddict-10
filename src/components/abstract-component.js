@@ -18,9 +18,8 @@ export default class AbstractComponent {
     }
 
     return this._element;
-  }
-
-  removeElement() { // удаляет элемент
+  
+  removeElement() {
     this._element = null;
   }
 }
