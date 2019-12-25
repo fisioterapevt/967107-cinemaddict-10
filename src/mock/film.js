@@ -11,7 +11,7 @@ import {
 
 const descriptionSentences = FilmDiscription.split(`. `); // разбивает общее описание на массив предложений
 
-const getRandomArrayItem = (array) => { // возвращает рандомное количество элементов в array
+const getRandomArrayItem = (array) => { // возвращает рандомный элемент в array
   const randomIndex = getRandomNumber(0, array.length - 1);
   return array[randomIndex];
 };
@@ -35,11 +35,11 @@ export const generateFilm = () => {
       hour: getRandomNumber(0, 1),
       min: getRandomNumber(0, 60)
     },
-    genre: getRandomArrayItem(FilmGenres),
+    genre: getRandomArray(FilmGenres, getRandomNumber(1, 3)),
     countComments: getRandomNumber(0, 20),
-    isFavorite: Math.random() > 0.8,
-    isWatched: Math.random() > 0.3,
-    isWatchList: Math.random() > 0.4,
+    isFavorite: false,
+    isWatched: false,
+    isWatchList: false,
     ageRestricted: Math.random() > 0.5 ? `18+` : ``,
     original: getRandomArrayItem(FilmNames),
     director: getRandomArrayItem(Directors),

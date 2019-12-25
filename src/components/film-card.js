@@ -1,7 +1,12 @@
 import AbstractComponent from '../components/abstract-component';
 
-const createFilmCardTemplate = (film) => {
+const createFilmCardTemplate = (film, options = {}) => {
   const {name, poster, description, rating, year, duration, genre, countComments} = film;
+  const {isWatchlist, isWatched, isFavorite} = options;
+
+  const isWatchlistClass = isWatchlist ? `checked` : ``;
+  const isWatchedClass = isWatched ? `checked` : ``;
+  const isFavoriteClass = isFavorite ? `checked` : ``;
 
   return (
     `<article class="film-card">
@@ -16,9 +21,9 @@ const createFilmCardTemplate = (film) => {
           <p class="film-card__description">${description}</p>
           <a class="film-card__comments">${countComments} comments</a>
           <form class="film-card__controls">
-            <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist">Add to watchlist</button>
-            <button class="film-card__controls-item button film-card__controls-item--mark-as-watched">Mark as watched</button>
-            <button class="film-card__controls-item button film-card__controls-item--favorite">Mark as favorite</button>
+            <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist" ${isWatchlistClass} >Add to watchlist</button>
+            <button class="film-card__controls-item button film-card__controls-item--mark-as-watched" ${isWatchedClass} >Mark as watched</button>
+            <button class="film-card__controls-item button film-card__controls-item--favorite" ${isFavoriteClass} >Mark as favorite</button>
           </form>
     </article>`
   );
@@ -39,27 +44,27 @@ export default class FilmCard extends AbstractComponent {
     .addEventListener(`click`, handler);
   }
 
-  setClickOnPosterHandler(handler) { //  публичный метод
+  setClickOnPosterHandler(handler) { //  публичный метод реализующий открытие попапа по клику на картинку фильма
     this._setClickHandler(`.film-card__poster`, handler);
   }
 
-  setClickOnTitleHandler(handler) {
+  setClickOnTitleHandler(handler) { //  публичный метод реализующий открытие попапа по клику на название фильма
     this._setClickHandler(`.film-card__title`, handler);
   }
 
-  setClickOnCommentsHandler(handler) {
+  setClickOnCommentsHandler(handler) { //  публичный метод реализующий открытие попапа по клику на комментарии к фильму
     this._setClickHandler(`.film-card__comments`, handler);
   }
 
-  setClickOnAddToWatchList(handler) {
+  setAddWatchListButtonClickHandler(handler) { //  публичный метод реализующий добавление фильма в  Watchlist
     this._setClickHandler(`.film-card__controls-item--add-to-watchlist`, handler);
   }
 
-  setClickOnMarkAsWatchedHandler(handler) {
+  setWatchedButtonClickHandler(handler) { //  публичный метод реализующий отметку фильма как просмотренный
     this._setClickHandler(`.film-card__controls-item--mark-as-watched`, handler);
   }
 
-  setClickOnControlsItemFavoriteHandler(handler) {
+  setFavoriteButtonClickHandler(handler) { //  публичный метод реализующий отметку фильма понравившийся
     this._setClickHandler(`.film-card__controls-item--favorite`, handler);
   }
 }
