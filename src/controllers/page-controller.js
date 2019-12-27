@@ -40,7 +40,7 @@ export default class PageController {
     this._sortComponent = new SortComponent();
 
     this._onDataChange = this._onDataChange.bind(this); // привязываем к контексту
-    this._onViewChange = this._onViewChange.bind(this);
+    // this._onViewChange = this._onViewChange.bind(this);
 
     this. _onSortTypeChange = this. _onSortTypeChange.bind(this); // привязываем к контексту
     this._sortComponent.setClickOnSortHandler(this. _onSortTypeChange);
@@ -139,9 +139,9 @@ export default class PageController {
     movieController.render(this._films[index]);
   }
 
-  _onViewChange() {
-    this._showedFilmControllers.forEach((it) => it.setDefaultView());
-  }
+  // _onViewChange() {
+  //   this._showedFilmControllers.forEach((it) => it.setDefaultView());
+  // }
 
   // метод фильтрует фильмы и отрисовывает на страницу отфильтрованные блоки
   _onSortTypeChange(sortType) {

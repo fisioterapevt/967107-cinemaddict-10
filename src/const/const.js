@@ -89,5 +89,3 @@ export const RenderPosition = {
   AFTERBEGIN: `afterbegin`,
   BEFOREEND: `beforeend`
 };
-
-// export const ESC_KEYCODE = `Escape` || `Esc`;

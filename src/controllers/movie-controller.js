@@ -7,18 +7,20 @@ import {render, remove, replace} from '../utils/render';
 
 const siteFooterElement = document.querySelector(`.footer`);
 
-const Mode = {
-  DEFAULT: `default`,
-  POPUP: `popup`,
-};
+// const Mode = {
+//   DEFAULT: `default`,
+//   POPUP: `popup`,
+// };
+
+const MAX_GENRE_COUNT = 1;
+
 export default class MovieController {
-  constructor(container, onDataChange, onViewChange) {
+  constructor(container, onDataChange) {
     this._container = container;
     this._onDataChange = onDataChange;
-    this._onViewChange = onViewChange;
-
+    // this._onViewChange = onViewChange;
     this._onEscKeyDown = this._onEscKeyDown.bind(this);
-    this._mode = Mode.DEFAULT;
+    // this._mode = Mode.DEFAULT;
   }
 
   render(film) {
@@ -28,17 +30,17 @@ export default class MovieController {
     this._filmDetailsPopupComponent = new FilmDetailsPopupComponent(film);
 
     this._filmCardComponent.setClickOnPosterHandler(() => {
-      this._onViewChange(); // отображает дефолтное состояние
+      // this._onViewChange(); // отображает дефолтное состояние
       this._openPopup();
     });
 
     this._filmCardComponent.setClickOnTitleHandler(() => { // реализует метод для открытия попапа при клике  на название фильма
-      this._onViewChange(); // отображает дефолтное состояние
+      // this._onViewChange(); // отображает дефолтное состояние
       this._openPopup();
     });
 
     this._filmCardComponent.setClickOnCommentsHandler(() => { // реализует метод для открытия попапа при клике  на комментарии к фильму
-      this._onViewChange(); // отображает дефолтное состояние
+      // this._onViewChange(); // отображает дефолтное состояние
       this._openPopup();
     });
 
@@ -71,17 +73,20 @@ export default class MovieController {
     }
   }
 
-  setDefaultView() {
-    if (this._mode !== Mode.DEFAULT) {
-      this._closePopup();
-    }
-  }
+  // setDefaultView() {
+  //   // if (this._mode !== Mode.DEFAULT) {
+  //   this._closePopup();
+  //   alert(`setDefaultView`)
+  //   // }
+  // }
 
   _openPopup() { // метод отрисовывает попап
+    this._filmDetailsPopupComponent._setChangeGenre(this._filmDetailsPopupComponent, MAX_GENRE_COUNT); // вызывает метод проверки на количество жанров
+
     render(siteFooterElement, this._filmDetailsPopupComponent, RenderPosition.BEFOREEND);
     document.addEventListener(`keydown`, this._onEscKeyDown);
 
-    this._mode = Mode.POPUP;
+    // this._mode = Mode.POPUP;
   }
 
   _closePopup() { // метод закрывает попап кликом на кнопку закрытия

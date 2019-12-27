@@ -55,22 +55,20 @@ const createFilmRatingBlock = () => {
 
 const createFilmDetailsPopupTemplate = (film, options = {}) => {
   const {name, ageRestricted, poster, director, writer, actor, duration, country, genre, rating, description, countComments} = film;
-  const {isWatchlist, isWatched, isFavorite, isSmile, isSleeping, isGpuke, isAngry} = options;
+  const {isWatchlist, isWatched, isFavorite, path, pluralGenres} = options;
+
   // выбрать состояние фильма
   const isWatchlistClass = isWatchlist ? `checked` : ``;
   const isWatchedClass = isWatched ? `checked` : ``;
   const isFavoriteClass = isFavorite ? `checked` : ``;
-  // выбрать эмоцию
-  const isEmojiSmileClass = isSmile ? `checked` : ``;
-  const isEmojiSleepingClass = isSleeping ? `checked` : ``;
-  const isEmojiGpukeClass = isGpuke ? `checked` : ``;
-  const isEmojiAngryClass = isAngry ? `checked` : ``;
-  const genreOrGenres = genre.length > 1 ? `Genres!!!` : `Genre`;
+
+  const pathToEmoji = path;
+
+  const countGenres = pluralGenres;
 
   // добавляет и убирает блок с рейтингом в зависимости от просмотрен фильм или нет
   const filmRatingBlock = createFilmRatingBlock();
   const isFilmRatingBlock = isWatched ? filmRatingBlock : null;
-
   return (
     `<section class="film-details">
         <form class="film-details__inner" action="" method="get">
@@ -122,7 +120,7 @@ const createFilmDetailsPopupTemplate = (film, options = {}) => {
                     <td class="film-details__cell">${country}</td>
                 </tr>
                 <tr class="film-details__row">
-                    <td class="film-details__term">${genreOrGenres}</td>
+                    <td class="film-details__term">${countGenres ? pluralGenres : `Genre`}</td>
                     <td class="film-details__cell">
                     <span class="film-details__genre">${genre}</span>
                 </tr>
@@ -156,7 +154,7 @@ const createFilmDetailsPopupTemplate = (film, options = {}) => {
 
             <div class="film-details__new-comment">
                 <div for="add-emoji" class="film-details__add-emoji-label">
-                <img src="images/emoji/smile.png" width="55" height="55" alt="emoji">
+                <img src="images/emoji/${pathToEmoji ? path : `smile`}.png" width="55" height="55" alt="emoji">
                 </div>
 
                 <label class="film-details__comment-label">
@@ -166,25 +164,25 @@ const createFilmDetailsPopupTemplate = (film, options = {}) => {
 
                 <div class="film-details__emoji-list">
                 <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-smile"
-                    value="sleeping" ${isEmojiSmileClass}>
+                    value="sleeping">
                 <label class="film-details__emoji-label" for="emoji-smile">
                     <img src="./images/emoji/smile.png" width="30" height="30" alt="emoji">
                 </label>
 
                 <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio"
-                    id="emoji-sleeping" value="neutral-face" ${isEmojiSleepingClass}>
+                    id="emoji-sleeping" value="neutral-face">
                 <label class="film-details__emoji-label" for="emoji-sleeping">
                     <img src="./images/emoji/sleeping.png" width="30" height="30" alt="emoji">
                 </label>
 
                 <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-gpuke"
-                    value="grinning" ${isEmojiGpukeClass}>
+                    value="grinning">
                 <label class="film-details__emoji-label" for="emoji-gpuke">
                     <img src="./images/emoji/puke.png" width="30" height="30" alt="emoji">
                 </label>
 
                 <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-angry"
-                    value="grinning" ${isEmojiAngryClass}>
+                    value="grinning">
                 <label class="film-details__emoji-label" for="emoji-angry">
                     <img src="./images/emoji/angry.png" width="30" height="30" alt="emoji">
                 </label>
@@ -214,7 +212,8 @@ export default class FilmDetailsPopup extends AbstractSmartComponent {
       isSleeping: this._isSleeping,
       isGpuke: this._isGpuke,
       isAngry: this._isAngry,
-      genre: this._genre,
+      pluralGenres: this._pluralGenres,
+      path: this._path
     });
   }
 
@@ -226,13 +225,20 @@ export default class FilmDetailsPopup extends AbstractSmartComponent {
     super.rerender();
   }
 
+  _setChangeGenre(genreCount, MAX_GENRE_COUNT) { // проверяет количество жанров фильма и меняет Genre на Genres
+    if (genreCount._film.genre.length > MAX_GENRE_COUNT) {
+      this._pluralGenres = `Genres`;
+
+      this.rerender();
+    }
+  }
+
   setClosePopupButonClickHandler(handler) {
     this.getElement().querySelector(`.film-details__close-btn`).addEventListener(`click`, handler);
   }
 
   _subscribeOnEvents() { // восстанавливает обработчики событий
     const element = this.getElement();
-
     element.querySelector(`.film-details__control-label--watchlist`)
       .addEventListener(`click`, () => {
         this._isWatchlist = !this._isWatchlist;
@@ -252,5 +258,29 @@ export default class FilmDetailsPopup extends AbstractSmartComponent {
 
         this.rerender();
       });
+
+    const emoji = element.querySelectorAll(`.film-details__emoji-item`); // коллекция emoji
+    emoji.forEach((em) => { // устанавливает обработчик клика на все emoji
+      em.addEventListener(`click`, () => {
+        switch (em.id) {
+          case `emoji-smile`:
+            this._path = `smile`;
+            this.rerender();
+            break;
+          case `emoji-sleeping`:
+            this._path = `sleeping`;
+            this.rerender();
+            break;
+          case `emoji-gpuke`:
+            this._path = `puke`;
+            this.rerender();
+            break;
+          case `emoji-angry`:
+            this._path = `angry`;
+            this.rerender();
+            break;
+        }
+      });
+    });
   }
 }
