@@ -9,6 +9,8 @@ import {
   Countries
 } from '../const/const';
 
+import {formatDate, formatTime} from '../utils/common';
+
 const descriptionSentences = FilmDiscription.split(`. `); // разбивает общее описание на массив предложений
 
 const getRandomArrayItem = (array) => { // возвращает рандомный элемент в array
@@ -20,8 +22,19 @@ const getRandomNumber = (min, max) => { // возвращает рандомно
   return min + Math.floor((max + 1 - min) * Math.random());
 };
 
+const getRandomDate = () => { // возвращает рандомную дату
+  const targetDate = new Date();
+  const randomValue = getRandomNumber(0, 31);
+
+  targetDate.setDate(targetDate.getDate() + randomValue);
+  targetDate.setMonth(targetDate.getMonth() - randomValue);
+  targetDate.setFullYear(targetDate.getFullYear() - randomValue);
+
+  return targetDate;
+};
+
 // возвращает рандомно из массива предложений arr элементы  в количестве count
-const getRandomArray = (arr, count) => arr.sort(() => Math.random() - 0.5).slice(0, count).join(` `);
+const getRandomArray = (arr, count) => arr.sort(() => Math.random() - 0.5).slice(0, count);
 
 export const generateFilm = () => {
 
@@ -30,11 +43,8 @@ export const generateFilm = () => {
     poster: getRandomArrayItem(FilmPosters),
     description: getRandomArray(descriptionSentences, getRandomNumber(1, 3)),
     rating: getRandomNumber(0, 10),
-    year: getRandomNumber(1950, 2019),
-    duration: {
-      hour: getRandomNumber(0, 1),
-      min: getRandomNumber(0, 60)
-    },
+    year: formatDate(getRandomDate()),
+    duration: formatTime(),
     genre: getRandomArray(FilmGenres, getRandomNumber(1, 3)),
     countComments: getRandomNumber(0, 20),
     isFavorite: false,
