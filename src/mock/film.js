@@ -30,6 +30,9 @@ const getRandomDate = () => { // возвращает рандомную дат�
   targetDate.setMonth(targetDate.getMonth() - randomValue);
   targetDate.setFullYear(targetDate.getFullYear() - randomValue);
 
+  targetDate.setHours(1);
+  targetDate.setMinutes(targetDate.getMinutes() - randomValue);
+
   return targetDate;
 };
 
@@ -44,7 +47,7 @@ export const generateFilm = () => {
     description: getRandomArray(descriptionSentences, getRandomNumber(1, 3)),
     rating: getRandomNumber(0, 10),
     year: formatDate(getRandomDate()),
-    duration: formatTime(),
+    duration: formatTime(getRandomDate()),
     genre: getRandomArray(FilmGenres, getRandomNumber(1, 3)),
     countComments: getRandomNumber(0, 20),
     isFavorite: false,

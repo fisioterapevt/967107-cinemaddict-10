@@ -113,7 +113,7 @@ const createFilmDetailsPopupTemplate = (film, options = {}) => {
                 </tr>
                 <tr class="film-details__row">
                     <td class="film-details__term">Runtime</td>
-                    <td class="film-details__cell">${duration.hour}h ${duration.min}m</td>
+                    <td class="film-details__cell">${duration}h ${duration}m</td>
                 </tr>
                 <tr class="film-details__row">
                     <td class="film-details__term">Country</td>
