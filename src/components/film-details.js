@@ -1,4 +1,5 @@
 import AbstractSmartComponent from './abstract-smart-component';
+import {remove} from '../utils/render';
 // блок с рейтингом фильма
 const createFilmRatingBlock = () => {
   return (
@@ -233,18 +234,17 @@ export default class FilmDetailsPopup extends AbstractSmartComponent {
     }
   }
 
-  setClosePopupButonClickHandler(handler) {
-    this.getElement().querySelector(`.film-details__close-btn`).addEventListener(`click`, handler);
-  }
-
   _subscribeOnEvents() { // восстанавливает обработчики событий
+
     const element = this.getElement();
+
     element.querySelector(`.film-details__control-label--watchlist`)
       .addEventListener(`click`, () => {
         this._isWatchlist = !this._isWatchlist;
 
         this.rerender();
       });
+
     element.querySelector(`.film-details__control-label--watched`)
       .addEventListener(`click`, () => {
         this._isWatched = !this._isWatched;
@@ -281,6 +281,11 @@ export default class FilmDetailsPopup extends AbstractSmartComponent {
             break;
         }
       });
+    });
+
+    element.querySelector(`.film-details__close-btn`) // обработчик клика на кнопку закрытия Попапа
+    .addEventListener(`click`, () => {
+      remove(this);
     });
   }
 }
