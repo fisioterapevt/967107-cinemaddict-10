@@ -1,7 +1,7 @@
 import moment from 'moment';
 // возвращает время
 export const formatTime = (date) => {
-  return moment(date).format(`hh:mm A`);
+  return moment(date).format(`hh:mm`);
 };
 
 // возвращает дату
